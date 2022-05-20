@@ -1,15 +1,20 @@
 import java.util.Random;
 
 public class QPHashTable extends OAHashTable {
+	private long p;
+	private int m;
+	ModHash func;
 
 	public QPHashTable(int m, long p) {
 		super(m);
-		// TODO Complete hash table constructor.
+		this.m = m;
+		this.p = p;
+		this.func = ModHash.GetFunc(m,p);
 	}
 	
 	@Override
 	public int Hash(long x, int i) {
-		// TODO implement hash function
-		return 0;
+		return Math.floorMod((func.Hash(x) + i*i) , m);
 	}
+
 }

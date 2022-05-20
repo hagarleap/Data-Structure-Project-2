@@ -1,8 +1,10 @@
+import groovy.transform.Final;
 
 public abstract class OAHashTable implements IHashTable {
 	
-	private HashTableElement [] table;
-	
+	public static HashTableElement [] table;
+	private static HashTableElement deleted = new HashTableElement(-1,0);
+
 	public OAHashTable(int m) {
 		this.table = new HashTableElement[m];
 		// TODO add to constructor as needed
@@ -16,11 +18,24 @@ public abstract class OAHashTable implements IHashTable {
 			if(table[j] == null){
 				return null;
 			}
-			else if((table[j].GetKey() == key) && (!table[j].getDeleted())){ //
+			else if(table[j].GetKey() == key){ //
 				return table[j];
 			}
 		}
 		return null;
+	}
+
+	private int FindIndex(long key){ //so we can find index for delete
+		for(int i=0; i< table.length; i++){
+			int j = Hash(key, i);
+			if(table[j] == null){
+				return -1;
+			}
+			else if(table[j].GetKey() == key){ //
+				return j;
+			}
+		}
+		return -1;
 	}
 	
 	@Override
@@ -29,7 +44,7 @@ public abstract class OAHashTable implements IHashTable {
 			boolean inserted = false; //indicator if to throw tableisfullexception
 			for(int i=0; i< table.length; i++){
 				int j = Hash(hte.GetKey(), i);
-				if(table[j] == null || table[i].getDeleted()){ //check back in forum if this is ok!!!!!!!
+				if(table[j] == null || table[j].GetKey()==-1){
 					table[j] = hte;
 					inserted = true;
 					break;
@@ -46,9 +61,9 @@ public abstract class OAHashTable implements IHashTable {
 	
 	@Override
 	public void Delete(long key) throws KeyDoesntExistException {
-		HashTableElement element = Find(key);
-		if(!(element == null)){
-			element.Delete();
+		int element = FindIndex(key);
+		if(element!=-1){
+			table[element] = deleted;
 		}
 		else{
 			throw new KeyDoesntExistException(key);
