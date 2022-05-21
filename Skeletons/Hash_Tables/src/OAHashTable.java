@@ -1,4 +1,3 @@
-import groovy.transform.Final;
 
 public abstract class OAHashTable implements IHashTable {
 	

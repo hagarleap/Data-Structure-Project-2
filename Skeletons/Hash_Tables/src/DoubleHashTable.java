@@ -11,7 +11,7 @@ public class DoubleHashTable extends OAHashTable {
 		this.m = m;
 		this.p = p;
 		this.func1 = ModHash.GetFunc(m,p);
-		this.func2 = ModHash.GetFunc(m,p);
+		this.func2 = ModHash.GetFunc(m-1,p);
 	}
 	
 	@Override
