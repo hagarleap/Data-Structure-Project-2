@@ -1,7 +1,7 @@
 
 public abstract class OAHashTable implements IHashTable {
 	
-	public static HashTableElement [] table;
+	protected HashTableElement [] table;
 	private static HashTableElement deleted = new HashTableElement(-1,0);
 
 	public OAHashTable(int m) {
@@ -17,8 +17,8 @@ public abstract class OAHashTable implements IHashTable {
 			if(table[j] == null){
 				return null;
 			}
-			else if(table[j].GetKey() == key){ //
-				return table[j];
+			else if(this.table[j].GetKey() == key){ //
+				return this.table[j];
 			}
 		}
 		return null;

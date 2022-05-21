@@ -14,6 +14,12 @@ public class AQPHashTable extends OAHashTable {
 	
 	@Override
 	public int Hash(long x, int i) {
-		return Math.floorMod((func.Hash(x) + (int)(Math.pow(-1,i))*i*i),  m);
+		if((i&1) == 0){ //checking the first bit of 1!
+			return Math.floorMod((func.Hash(x) + (i*i)),  m);
+		}
+		else{
+			return Math.floorMod((func.Hash(x) + (-1)*i*i),  m);
+		}
+
 	}
 }
