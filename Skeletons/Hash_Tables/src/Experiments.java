@@ -78,50 +78,51 @@ public class Experiments {
 //        }
 
 ///////////////////////experiment 3////////////////////
-        int p = 1000000007;
-        int m = 10000019;
-        DoubleHashTable doub_hash = new DoubleHashTable(m, p);
+        for(int g=0; g<10; g++) {
+            int p = 1000000007;
+            int m = 10000019;
+            DoubleHashTable doub_hash = new DoubleHashTable(m, p);
 
-        for(int i = 0; i<6; i++){
-            // create list of rand ints
-            List<Integer> rand_set = new ArrayList<>();
-            Random rand = new Random();
-            for(int j = 0; j < 5000009; j++){
-                int b = rand.nextInt(100);
-                rand_set.add((100 * j + b));
+            for (int i = 0; i < 6; i++) {
+                // create list of rand ints
+                List<Integer> rand_set = new ArrayList<>();
+                Random rand = new Random();
+                for (int j = 0; j < (m / 2); j++) {
+                    int b = rand.nextInt(100);
+                    rand_set.add((100 * j + b));
+                }
+                //add rand int set into list
+
+                long startTime = System.nanoTime();
+                for (Integer rand_elem : rand_set) {
+
+                    HashTableElement hte = new HashTableElement(rand_elem, 0);
+
+                    try {
+                        doub_hash.Insert(hte);
+                    } catch (IHashTable.TableIsFullException ex) {
+                        System.out.println("table seems full!");
+                    } catch (IHashTable.KeyAlreadyExistsException ex) {
+                        System.out.println("double key exception");
+                    }
+
+                }
+                for (Integer rand_elem : rand_set) {
+                    try {
+                        doub_hash.Delete(rand_elem);
+                    } catch (IHashTable.KeyDoesntExistException ex) {
+                        System.out.println("key was not found!");
+                    }
+
+                }
+
+                long endTime = System.nanoTime();
+                long totalTime = endTime - startTime;
+                System.out.println("experiment " + i + ": " + (totalTime / 1000000000.0));
             }
-            //add rand int set into list
 
-            long startTime = System.nanoTime();
-            for(Integer rand_elem: rand_set){
 
-                HashTableElement hte = new HashTableElement(rand_elem, 0);
-
-                try{ doub_hash.Insert(hte); }
-
-                catch (IHashTable.TableIsFullException ex) {}
-
-                catch (IHashTable.KeyAlreadyExistsException ex) {
-                    System.out.println("double key exception");
-                }
-
-                }
-            for(Integer rand_elem: rand_set){
-                try{doub_hash.Delete(rand_elem);
-                }
-                catch (IHashTable.KeyDoesntExistException ex){
-                    System.out.println("delete_error");
-                }
-
-            }
-
-            long endTime = System.nanoTime();
-            long totalTime = endTime - startTime;
-            System.out.println("experiment " + i+ ": " + (totalTime / 1000000000.0));
         }
-
-
-
 
     }
 
