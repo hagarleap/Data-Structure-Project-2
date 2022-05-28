@@ -39,43 +39,8 @@ public class Experiments {
 //            System.out.println("finished experiment: "+ k );
 //        }
 
-///////////////////////experiment 2////////////////////
-//        int p = 1000000007;
-//        int m = 10000019;
-//
-//        Random rand = new Random();
-//        QPHashTable quad1 = new QPHashTable(m, p);
-//        AQPHashTable quad2 = new AQPHashTable(m, p);
-//        LPHashTable quad3 = new LPHashTable(m, p);
-//        DoubleHashTable quad4 = new DoubleHashTable(m, p);
-//        //int error_count=0;
-//        //int insert_count = 0;
-//        int answer = Math.floorDiv(m*19, 20);
-//        Collection<OAHashTable> quadlist = new ArrayList<>();
-//
-//        quadlist.add(quad2);
-//        quadlist.add(quad3);
-//        quadlist.add(quad4);
-//
-//        for (OAHashTable quad : quadlist) {
-//            long startTime = System.nanoTime();
-////            for (int i = 0; i < 5000009; i++) {
-//        for(int i=0; i<answer; i++){
-//                int b = rand.nextInt(100);
-//                HashTableElement hte = new HashTableElement((100 * i + b), i);
-//                try {
-//                    quad.Insert(hte);
-//                    //insert_count ++;
-//                } catch (IHashTable.TableIsFullException ex) {
-//                    //error_count++;
-//                }
-//                catch (IHashTable.KeyAlreadyExistsException ex) {
-//                }
-//            }
-//            long endTime = System.nanoTime();
-//            long totalTime = endTime - startTime;
-//            System.out.println((totalTime / 1000000000.0));
-//        }
+/////////////////////experiment 2////////////////////
+
 
 ///////////////////////experiment 3////////////////////
         for(int g=0; g<10; g++) {
