@@ -7,7 +7,7 @@ public class experiment_2 {
      public static void main(String[] args) {
          int p = 1000000007;
          int m = 10000019;
-         for(int j=0; j<3; j++) {
+         for(int j=0; j<10; j++) {
              System.out.println("trial "+j);
              Random rand = new Random();
              QPHashTable quad1 = new QPHashTable(m, p);
@@ -47,7 +47,7 @@ public class experiment_2 {
              }
          }
          System.out.println("experiment 2 part 2");
-         for(int j=0; j<3; j++) {
+         for(int j=0; j<10; j++) {
              System.out.println("trial "+j);
              Random rand = new Random();
              AQPHashTable quad2 = new AQPHashTable(m, p);
