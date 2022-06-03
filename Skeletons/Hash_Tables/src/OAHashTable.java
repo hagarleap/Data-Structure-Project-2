@@ -40,33 +40,33 @@ public abstract class OAHashTable implements IHashTable {
 	@Override
 	public void Insert(HashTableElement hte) throws TableIsFullException,KeyAlreadyExistsException {
 			boolean inserted = false; //indicator if to throw tableisfullexception
-			int last_deleted_index = -1;
+			int first_deleted_index = -1;
 			for(int i=0; i< table.length; i++){
 				int j = Hash(hte.GetKey(), i);
 				if(table[j]!=null && table[j].GetKey()== hte.GetKey()) {
 					throw new KeyAlreadyExistsException(hte);
 				}
 				if (table[j] == null){
-					if(last_deleted_index==-1) {
+					if(first_deleted_index==-1) {
 						table[j] = hte;
 						inserted = true;
 						break;
 					}
 					else{
-						table[last_deleted_index] = hte;
+						table[first_deleted_index] = hte;
 						inserted = true;
 						break;
 					}
 				}
 				else if ((table[j] != null) && (table[j].GetKey() == -1)){
-					if(last_deleted_index==-1){
-						last_deleted_index=j;
+					if(first_deleted_index==-1){
+						first_deleted_index=j;
 					}
 				}
 			}
 			if(!inserted){
-				if(last_deleted_index>-1){
-					table[last_deleted_index] = hte;
+				if(first_deleted_index>-1){
+					table[first_deleted_index] = hte;
 				}
 				else throw new TableIsFullException(hte);
 			}
